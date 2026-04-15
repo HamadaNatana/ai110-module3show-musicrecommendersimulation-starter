@@ -1,5 +1,7 @@
 # 🎵 Music Recommender Simulation
 
+![alt text](image.png)
+
 ## Project Summary
 
 In this project you will build and explain a small music recommender system.
@@ -17,17 +19,21 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Explain your design in plain language.
+In real world applications, songs are suggested based on different aspects of the song's characteristics. Some systems prioritize the genre of the music as the most important aspect for the recommendations, while others prioritize the user's most listened to artists. In this system, the recommender will prioritize the user's favorite mood and genre of songs as stored in the UserProfile.
 
-Some prompts to answer:
+The recommender system will score the mood and genre of the song's with the highest priority, then the energy and valence and will be rated along the second tier of priorities. Then, the final tier will involve rating the danceability and acousticness. These priorities will be based on a weighted score of how each category aligns with the user's preferences. 
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+The highest priorities will be rated based on exact matches, since mood and genre are plain words and cannot be converted into numbers. If it is an exact match, then the score will be 1, and 0 otherwise. The lower priorities will be kept as their own scores attribute to them. The scoring method will be 1 - the absolute value of the difference from the user's preferences with the decimal values pulled from the song's data. 
 
-You can include a simple diagram or bullet list if helpful.
+These scores will then be multiplied by the following weights:
+- Genre match - x3
+- Mood match - x2
+- Energy - x2
+- Valence - x1.5
+- Danceability - x1
+- Acousticness - x0.5
+
+The scores will then be added up together, and the recommender will then sort those recommendations based on the highest scores.
 
 ---
 
